@@ -153,118 +153,117 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-gray-900">Modèle 3D Éducatif des Reins</h1>
+        <div className="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Modèle 3D Éducatif des Reins</h1>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto px-2 py-3 sm:px-6 lg:px-8">
         <div className="bg-white rounded-lg shadow">
-          <div className="p-4 border-b border-gray-200">
-            <div className="flex space-x-4">
+          {/* Boutons de contrôle responsifs */}
+          <div className="p-2 sm:p-4 border-b border-gray-200">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setIsHealthy(true)}
-                className={`px-4 py-2 rounded-md flex items-center space-x-2 ${isHealthy ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-700'}`}
+                className={`px-2 py-1 sm:px-4 sm:py-2 rounded-md flex items-center gap-1 sm:gap-2 text-sm sm:text-base ${
+                  isHealthy ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-700'
+                }`}
               >
-                <Activity size={20} />
+                <Activity size={16} className="sm:w-5 sm:h-5" />
                 <span>Rein Sain</span>
               </button>
               <button
                 onClick={() => setIsHealthy(false)}
-                className={`px-4 py-2 rounded-md flex items-center space-x-2 ${!isHealthy ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-700'}`}
+                className={`px-2 py-1 sm:px-4 sm:py-2 rounded-md flex items-center gap-1 sm:gap-2 text-sm sm:text-base ${
+                  !isHealthy ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-700'
+                }`}
               >
-                <Brain size={20} />
+                <Brain size={16} className="sm:w-5 sm:h-5" />
                 <span>Rein Pathologique</span>
               </button>
               <button
                 onClick={() => setIsRotating(!isRotating)}
-                className="px-4 py-2 rounded-md bg-blue-500 text-white flex items-center space-x-2"
+                className="px-2 py-1 sm:px-4 sm:py-2 rounded-md bg-blue-500 text-white flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
               >
-                <RefreshCcw size={20} />
-                <span>{isRotating ? 'Arrêter Rotation' : 'Démarrer Rotation'}</span>
+                <RefreshCcw size={16} className="sm:w-5 sm:h-5" />
+                <span>{isRotating ? 'Arrêter' : 'Rotation'}</span>
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-4">
-            <div className="lg:col-span-2 bg-gray-50 rounded-lg relative" style={{ height: '500px' }}>
+          {/* Structure responsive avec une grille qui se transforme en colonnes sur mobile */}
+          <div className="flex flex-col md:grid md:grid-cols-1 lg:grid-cols-3 gap-4 p-2 sm:p-4">
+            {/* La visualisation 3D prend toute la largeur sur mobile */}
+            <div className="lg:col-span-2 bg-gray-50 rounded-lg relative" style={{ height: '300px', minHeight: '300px', maxHeight: '50vh', width: '100%' }}>
               <div ref={mountRef} style={{ width: '100%', height: '100%' }} />
               {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-gray-50 bg-opacity-75">
-                  <div className="text-lg font-medium text-gray-700">Chargement du modèle...</div>
+                  <div className="text-base sm:text-lg font-medium text-gray-700">Chargement du modèle...</div>
                 </div>
               )}
             </div>
 
-
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h2 className="text-xl font-semibold mb-4">
+            {/* Informations descriptives */}
+            <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+              <h2 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-4">
                 {isHealthy ? 'Anatomie du Rein Sain' : 'Pathologies Rénales'}
               </h2>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {isHealthy ? (
                   <div>
                     <h3 className="font-medium">Cortex rénal</h3>
-                    <p className="text-sm text-gray-600">Zone périphérique riche en glomérules rénaux.</p>
+                    <p className="text-xs sm:text-sm text-gray-600">Zone périphérique riche en glomérules rénaux.</p>
                     <h3 className="font-medium mt-2">Médulla</h3>
+                    <p className="text-xs sm:text-sm text-gray-600">Contient les pyramides rénales qui filtrent le sang.</p>
                    
-                   <p className="text-sm text-gray-600">Contient les pyramides rénales qui filtrent le sang.</p>
-                   
-                   <div className="mt-4 p-3 bg-green-100 border border-green-300 rounded">
-      <h3 className="font-medium text-green-800">✅ Pourquoi ce rein est considéré comme sain ?</h3>
-      <p className="text-sm text-green-700 mt-1">
-        Ce rein est sain car il a une structure normale, sans inflammation ni kystes. Il fonctionne efficacement pour filtrer les déchets du sang, équilibrer les liquides du corps et produire des hormones nécessaires.
-      </p>
-    </div>
+                    <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-green-100 border border-green-300 rounded">
+                      <h3 className="font-medium text-green-800 text-sm sm:text-base">✅ Pourquoi ce rein est considéré comme sain ?</h3>
+                      <p className="text-xs sm:text-sm text-green-700 mt-1">
+                        Ce rein est sain car il a une structure normale, sans inflammation ni kystes. Il fonctionne efficacement pour filtrer les déchets du sang, équilibrer les liquides du corps et produire des hormones nécessaires.
+                      </p>
+                    </div>
 
-    {/* 🛡️ Conseils pour garder ses reins en bonne santé */}
-    <div className="mt-4 p-3 bg-blue-100 border border-blue-300 rounded">
-      <h3 className="font-medium text-blue-800">🛡️ Comment garder ses reins en bonne santé ?</h3>
-      <ul className="list-disc list-inside text-sm text-blue-700 mt-1 space-y-1">
-        <li>Boire suffisamment d’eau chaque jour</li>
-        <li>Avoir une alimentation équilibrée pauvre en sel et en sucre</li>
-        <li>Éviter l’abus d’anti-inflammatoires et d’alcool</li>
-        <li>Faire de l’exercice physique régulièrement</li>
-        <li>Contrôler sa tension artérielle et son taux de sucre</li>
-        <li>Faire des bilans médicaux réguliers</li>
-      </ul>
-    
-    
-  </div>
+                    <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-blue-100 border border-blue-300 rounded">
+                      <h3 className="font-medium text-blue-800 text-sm sm:text-base">🛡️ Comment garder ses reins en bonne santé ?</h3>
+                      <ul className="list-disc list-inside text-xs sm:text-sm text-blue-700 mt-1 space-y-1">
+                        <li>Boire suffisamment d'eau chaque jour</li>
+                        <li>Avoir une alimentation équilibrée</li>
+                        <li>Éviter l'abus d'anti-inflammatoires et d'alcool</li>
+                        <li>Faire de l'exercice régulièrement</li>
+                        <li>Contrôler sa tension artérielle</li>
+                        <li>Faire des bilans médicaux réguliers</li>
+                      </ul>
+                    </div>
                   </div>
                 ) : (
                   <div>
                     <h3 className="font-medium">Rein polykystique</h3>
-                    <p className="text-sm text-gray-600">Présence de multiples kystes interférant avec la fonction rénale.</p>
+                    <p className="text-xs sm:text-sm text-gray-600">Présence de multiples kystes interférant avec la fonction rénale.</p>
                     <h3 className="font-medium mt-2">Symptômes</h3>
-                    <p className="text-sm text-gray-600">Douleurs, hypertension, insuffisance rénale.</p>
-                    <div className="mt-6 border-t pt-4">
-                    <div className="mt-4 p-3 bg-red-100 border border-red-300 rounded">
-    <h3 className="font-medium text-red-800">❌ Pourquoi ce rein est considéré comme pathologique ?</h3>
-    <p className="text-sm text-red-700 mt-1">
-      Ce rein présente des signes de maladie tels que des lésions, une inflammation ou des kystes. Cela peut affecter sa capacité à filtrer le sang correctement et provoquer un déséquilibre dans le corps.
-    </p>
-  </div>
+                    <p className="text-xs sm:text-sm text-gray-600">Douleurs, hypertension, insuffisance rénale.</p>
+                    
+                    <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-red-100 border border-red-300 rounded">
+                      <h3 className="font-medium text-red-800 text-sm sm:text-base">❌ Pourquoi ce rein est considéré comme pathologique ?</h3>
+                      <p className="text-xs sm:text-sm text-red-700 mt-1">
+                        Ce rein présente des signes de maladie tels que des lésions, une inflammation ou des kystes. Cela peut affecter sa capacité à filtrer le sang correctement et provoquer un déséquilibre dans le corps.
+                      </p>
+                    </div>
 
-  {/* 🩺 Conseils pour prévenir ou ralentir une maladie rénale */}
-  <div className="mt-4 p-3 bg-yellow-100 border border-yellow-300 rounded">
-    <h3 className="font-medium text-yellow-800">🩺 Conseils pour préserver ou améliorer la santé rénale</h3>
-    <ul className="list-disc list-inside text-sm text-yellow-700 mt-1 space-y-1">
-      <li>Suivre les traitements médicaux prescrits</li>
-      <li>Réduire la consommation de sel et de protéines animales</li>
-      <li>Arrêter de fumer et limiter l’alcool</li>
-      <li>Surveiller régulièrement la fonction rénale chez un médecin</li>
-      <li>Contrôler sa tension artérielle et son diabète</li>
-      <li>Boire de l’eau de façon modérée mais régulière</li>
-    </ul>
-  </div>
-</div>
-
+                    <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-yellow-100 border border-yellow-300 rounded">
+                      <h3 className="font-medium text-yellow-800 text-sm sm:text-base">🩺 Conseils pour préserver la santé rénale</h3>
+                      <ul className="list-disc list-inside text-xs sm:text-sm text-yellow-700 mt-1 space-y-1">
+                        <li>Suivre les traitements médicaux prescrits</li>
+                        <li>Réduire la consommation de sel</li>
+                        <li>Arrêter de fumer et limiter l'alcool</li>
+                        <li>Surveiller régulièrement la fonction rénale</li>
+                        <li>Contrôler sa tension artérielle</li>
+                        <li>Boire de l'eau régulièrement</li>
+                      </ul>
+                    </div>
                   </div>
                 )}
               </div>
             </div>
-            
           </div>
         </div>
       </main>
